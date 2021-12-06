@@ -2,11 +2,11 @@ from collections import defaultdict
 
 
 PART1_TEST_ANSWER = 5934
-PART2_TEST_ANSWER = -1
+PART2_TEST_ANSWER = 26984457539
 
 
 def _parse_line(s):
-    return [int(x) for x in s.split(',')]
+    return [int(x) for x in s.split(",")]
 
 
 def _get_data(filename):
@@ -24,22 +24,35 @@ def get_test_data():
     return _get_data("test_input.txt")
 
 
-def count_part1(state, days=80):
-    new_fish = 0
+def count(state, days):
     while days > 0:
-        for idx, fish_state in enumerate(state):
-            if fish_state == 0:
-                state[idx] = 6
-                new_fish += 1
+        new_state = defaultdict(int)
+        for day, count in state.items():
+            if day == 0:
+                next_day = 6
+                new_state[8] = count
             else:
-                state[idx] = fish_state - 1
-        state.extend([8 for _ in range(new_fish)])
-        new_fish = 0
+                next_day = day - 1
+            new_state[next_day] += count
+        state = new_state
         days -= 1
-    return len(state)
+
+    return sum(state.values())
+
+
+def prepare_state(data):
+    state = defaultdict(int)
+    for item in data:
+        state[item] += 1
+    return state
+
+
+def count_part1(data):
+    return count(prepare_state(data), days=80)
+
 
 def count_part2(data):
-    return -1
+    return count(prepare_state(data), days=256)
 
 
 if __name__ == "__main__":
