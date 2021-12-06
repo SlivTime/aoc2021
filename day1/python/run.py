@@ -13,7 +13,7 @@ TEST_DATA = [
 
 def get_data():
     # return TEST_DATA
-    with open("input.txt") as f:
+    with open("../input/input.txt") as f:
         data = [int(x) for x in f]
     return data
 
