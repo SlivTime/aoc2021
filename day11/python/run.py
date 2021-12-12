@@ -17,11 +17,11 @@ def _get_data(filename):
 
 
 def get_data():
-    return _get_data("/Users/avtalantsev/stuff/aoc2021/day11/input/input.txt")
+    return _get_data("../input/input.txt")
 
 
 def get_test_data():
-    return _get_data("/Users/avtalantsev/stuff/aoc2021/day11/input/test_input.txt")
+    return _get_data("../input/test_input.txt")
 
 
 def get_neighbor(data, i, j):
